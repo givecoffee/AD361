@@ -1,4 +1,6 @@
 # StarterLP03 Test Cases README (see Personal Notes for more info) 
+https://github.com/givecoffee/AD361/blob/main/StarterLP03/Personal%20Notes
+
 
 ## TEST CASES
 Any of the inputs that are not listed will be close to the baselines used, and for valid cases the postcondition is that the reservation is booked, saved, and that night is no longer available. Let's assume for cases with errors that the reservation is NOT saved, fees are not added or charged, and the calendar doesn't change/update or is altered. 
