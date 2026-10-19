@@ -28,14 +28,6 @@ Moving on, the README states our reservation requirements for North Vacation Boo
 - Invalid reservation information raises a `ValueError`.
 - An unavailable reservation raises an `UnavailableError`.
 
-Example Scenario for a Given/When/Then for underage input:
-
-Given that I am on the home page,
-And I am "12" years old
-When I try to enter my age
-Then the booking screen will reject access
-
-Let's say another rule is a user can only book 1-10 rooms at a time. We need to partition the range that is valid, and the two sides of the range that are invalid (less than 1, or greater than 10)
 
 | **Partition**        | <=0     | 1-10   | >=11    |
 | -------------------- | ------- | ------ | ------- |
@@ -72,5 +64,101 @@ What is the expected result?
 | TC2            | INVALID              | Any of the reservation rules fail (i.e 0 guests, 35 nights, etc)     | REJECTED, error thrown and no reservation or fee charged |
 | TC3            | not valid or invalid | Info is valid, however one of the nights booked is unavailable       | REJECTED, no reservation or fee charged                  |
 
+We continued following the steps for the process to decide what to test and before making any preconditons/postconditions to check for: 
 
+1. Identify the classifications. We used nights, guests, dates, and availability, and added the cleaning fee since it depends on whether the whole reservation is valid.
+2. Define the valid and invalid ranges or conditions for each one.
+3. Divide the values into partitions.
+4. Pick one representative value from each partition. We picked values from the middle of each range and left the edges (like 0, 1, 31, and 32 nights) for boundary value analysis later on
 
+The pricing rules are $50 and 25 for every additional guess over 5x a night. 
+
+### Equivalency Partition Tables for STARTERLP03:
+
+NUMBER OF NIGHTS REQUIREMENT:
+
+| Classification | Partition         | Condition           | Expected Result                      |
+| -------------- | ----------------- | ------------------- | ------------------------------------ |
+| # of Nights    | INVALID - TOO LOW | Fewer than 1 night  | ValueError                           |
+| # of Nights    | VALID             | 1-31 nights         | ACCEPTED, will charge $200 per night |
+| # of nights    | INVALID, too high | More than 31 nights | ValueErorr                           |
+
+NUMBER OF GUESTS REQUIREMENT:
+
+| Classification | Partition              | Condition             | Expected Result                                         |
+| -------------- | ---------------------- | --------------------- | ------------------------------------------------------- |
+| # of guests    | Invalid, low           | Fewer than 1 guest    | ValueError                                              |
+| # of guests    | Valid, standard $$rate | 1-5 guests            | ACCEPTED, no additional guest fees                      |
+| # of guests    | VALID, additional fee  | 6-12 guests, (over 5) | ACCEPTED, add $25 per additional guest over 5 per night |
+| # of guests    | INVALID, high          | more than 12 guess    | ValueError                                              |
+
+CHECK IN AND CHECKOUT DATES:
+
+| Classification | Partition              | Condition                             | Expected Result                        |
+| -------------- | ---------------------- | ------------------------------------- | -------------------------------------- |
+| Dates          | Valid orders           | check-in is before the check-out time | ACCEPTED, nights - checkout - checking |
+| Dates          | INVALID, same day      | checkin is same day as checkout       | ValueError                             |
+| Dates          | INVALID, reversed time | Check in is AFTER the checkout time   | ValueError                             |
+
+AVAILABILITY:
+
+| Classification | Partition              | Condition                                                    | Expected Result                                                       |
+| -------------- | ---------------------- | ------------------------------------------------------------ | --------------------------------------------------------------------- |
+| Availability   | Available              | every night from checkin up to the checkout time is open     | ACCEPTED!                                                             |
+| Availability   | unavailable            | at least one (1) night is already booked                     | Unavailable Error                                                     |
+| Availability   | checkout day is booked | all reserved nights are open but the checkout date is booked | ACCEPTED, since checkout isn't needed as a 'reserved night' available |
+CLEANING FEE:
+(used earlier for example but reiterating it here for organization)
+
+| Classification | Partition               | Condition                                     | Expected Result                               |
+| -------------- | ----------------------- | --------------------------------------------- | --------------------------------------------- |
+| CLeaning fee   | VALID reservation       | all rules have passed and every night is open | ACCEPTED, one time fee of $50 added           |
+| Cleaning fee   | INVALID reservation     | any of the rules fail                         | ValueError thrown, no fee is charged          |
+| Cleaning fee   | Unavailable reservation | valid info but the night is already booked    | UnavailableError thrown and no fee is charged |
+
+## TEST CASES
+Any of the inputs that are not listed will be close to the baselines used, and for valid cases the postcondition is that the reservation is booked, saved, and that night is no longer available. Let's assume for cases with errors that the reservation is NOT saved, fees are not added or charged, and the calendar doesn't change/update or is altered. 
+
+Below are the test case IDs so we can trace them better, their classification according to what they organized, the partition, inputs, and the expected results. This can be used as a guide for the test cases and can be helpful if requirements change or tests need to be adjusted.
+
+| ID   | Classification | Partition         | Input                                           | Expected Result               |
+| ---- | -------------- | ----------------- | ----------------------------------------------- | ----------------------------- |
+| TC01 | # of Nights    | Invalid, low      | Check-in 11/19/26, checkout 11/19/26            | ValueError                    |
+| TC02 | # of Nights    | Valid             | Check in 11/19/26, checkout 11/26/26 (7 nights) | ACCEPTED, total will be $1450 |
+| TC03 | # of nights    | Invalid, too high | Check in 11/19/26, checkout 11/19/27 ( a year)  | VALUE ERROR                   |
+| TC04 |                |                   |                                                 |                               |
+| TC05 |                |                   |                                                 |                               |
+| TC06 |                |                   |                                                 |                               |
+| TC07 |                |                   |                                                 |                               |
+| TC08 |                |                   |                                                 |                               |
+| TC09 |                |                   |                                                 |                               |
+| TC10 |                |                   |                                                 |                               |
+| TC11 |                |                   |                                                 |                               |
+| TC12 |                |                   |                                                 |                               |
+| TC13 |                |                   |                                                 |                               |
+| TC14 |                |                   |                                                 |                               |
+| TC15 |                |                   |                                                 |                               |
+| TC16 |                |                   |                                                 |                               |
+
+Example Scenario for a Given/When/Then for underage input:
+
+Given that I am on the home page,
+And I am "12" years old
+When I try to enter my age
+Then the booking screen will reject access
+
+Let's say another rule is a user can only book 1-10 rooms at a time. We need to partition the range that is valid, and the two sides of the range that are invalid (less than 1, or greater than 10)
+
+Coverage = partitions tested divided by the partitions identified multiplied by 100%
+
+In this case, there are 16 partitions and five (5) different classifications with a test case for each. Each input tests one partition, coverage is 16/16 which completes 100% coverage.
+
+Every single combination of nights and guests can take 372 test cases, because there is a max of 31 days in a month and guest limits are up to 12. 
+
+31x12 = 372 
+
+https://www.geeksforgeeks.org/software-engineering/equivalence-partitioning-method/
+
+### AI Statement 
+
+I will use AI to clean up this document in the future but currently was formatted and written in markdown using Obsidian alongside the lecture material. 
