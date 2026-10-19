@@ -1,0 +1,46 @@
+## TEST CASES
+Any of the inputs that are not listed will be close to the baselines used, and for valid cases the postcondition is that the reservation is booked, saved, and that night is no longer available. Let's assume for cases with errors that the reservation is NOT saved, fees are not added or charged, and the calendar doesn't change/update or is altered. 
+
+Below are the test case IDs so we can trace them better, their classification according to what they organized, the partition, inputs, and the expected results. This can be used as a guide for the test cases and can be helpful if requirements change or tests need to be adjusted.
+
+| ID   | Classification | Partition         | Input                                           | Expected Result               |
+| ---- | -------------- | ----------------- | ----------------------------------------------- | ----------------------------- |
+| TC01 | # of Nights    | Invalid, low      | Check-in 11/19/26, checkout 11/19/26            | ValueError                    |
+| TC02 | # of Nights    | Valid             | Check in 11/19/26, checkout 11/26/26 (7 nights) | ACCEPTED, total will be $1450 |
+| TC03 | # of nights    | Invalid, too high | Check in 11/19/26, checkout 11/19/27 ( a year)  | VALUE ERROR                   |
+| TC04 |                |                   |                                                 |                               |
+| TC05 |                |                   |                                                 |                               |
+| TC06 |                |                   |                                                 |                               |
+| TC07 |                |                   |                                                 |                               |
+| TC08 |                |                   |                                                 |                               |
+| TC09 |                |                   |                                                 |                               |
+| TC10 |                |                   |                                                 |                               |
+| TC11 |                |                   |                                                 |                               |
+| TC12 |                |                   |                                                 |                               |
+| TC13 |                |                   |                                                 |                               |
+| TC14 |                |                   |                                                 |                               |
+| TC15 |                |                   |                                                 |                               |
+| TC16 |                |                   |                                                 |                               |
+
+Example Scenario for a Given/When/Then for underage input:
+
+Given that I am on the home page,
+And I am "12" years old
+When I try to enter my age
+Then the booking screen will reject access
+
+Let's say another rule is a user can only book 1-10 rooms at a time. We need to partition the range that is valid, and the two sides of the range that are invalid (less than 1, or greater than 10)
+
+Coverage = partitions tested divided by the partitions identified multiplied by 100%
+
+In this case, there are 16 partitions and five (5) different classifications with a test case for each. Each input tests one partition, coverage is 16/16 which completes 100% coverage.
+
+Every single combination of nights and guests can take 372 test cases, because there is a max of 31 days in a month and guest limits are up to 12. 
+
+31x12 = 372 
+
+https://www.geeksforgeeks.org/software-engineering/equivalence-partitioning-method/
+
+### AI Statement 
+
+I will use AI to clean up this document in the future but currently was formatted and written in markdown using Obsidian alongside the lecture material. 
