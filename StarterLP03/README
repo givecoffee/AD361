@@ -1,0 +1,76 @@
+  
+## Topics
+
+- Black-box testing
+- Equivalence partitioning
+- Valid and invalid partitions
+- Test-case design
+
+For example, there are rules discussed in the lecture for the Staycation app such as ensure users are 18+, which has testable inputs. 
+
+We can create tables to organize what we need to test and what categories they belong to. For instance, this would belong under guests. We would check if guests that are booking are 18+ and the test condition would be "Inputting an age less than 18 to show that the age verification works." In the lecture, the example is written as "given I am on the home page and I am 18 years or older, when I enter my age and press OK then I will be given access to the booking screen." In this case, I am just testing if I will be denied access. 
+
+The test classifications will be 'nights', 'guests', 'dates', 'availability'. 
+We can test inputs against rules, make descriptive/detailed test conditions, and check for overlaps. To build out our test cases, we will need preconditions (what needs to be true before you even set up your test). This can be checking if we are in the right environment, and working in the right space with the right tools for the test conditions. If you are testing a profile functionality, a precondition would be a valid user account to test with for example. Next we will need inputs or actions (what you do or type for the test), the expected results from those inputs, and postconditions so the follow-up tasks, documentation, maybe additional checklist items. 
+
+Moving on, the README states our reservation requirements for North Vacation Booking and is what will be focused on: 
+### Reservation Requirements
+
+- A reservation must be between 1 and 31 nights, inclusive.
+- A reservation must include between 1 and 12 guests, inclusive.
+- The reservation costs $200 per night.
+- Every valid reservation includes a one-time $50 cleaning fee.
+- Each guest over five costs an additional $25 per night.
+- The check-in date must be before the checkout date.
+- The number of nights is calculated as `checkout date - check-in date`.
+- The checkout date is not counted as a reserved night.
+- Every night in the requested date range must be available.
+- Invalid reservation information raises a `ValueError`.
+- An unavailable reservation raises an `UnavailableError`.
+
+Example Scenario for a Given/When/Then for underage input:
+
+Given that I am on the home page,
+And I am "12" years old
+When I try to enter my age
+Then the booking screen will reject access
+
+Let's say another rule is a user can only book 1-10 rooms at a time. We need to partition the range that is valid, and the two sides of the range that are invalid (less than 1, or greater than 10)
+
+| **Partition**        | <=0     | 1-10   | >=11    |
+| -------------------- | ------- | ------ | ------- |
+| **Classification**   | INVALID | VALID  | INVALID |
+| **Expected Results** | REJECT  | ACCEPT | REJECT  |
+Edge cases could be inputting something other than a number, but this is the jist. 
+Data needs to be in distinct groups known as partitions, and partitions must be non-empty and not overlap. 
+
+EACH test covers 1 of 3 partitions, so each adds somewhere around 33% coverage.
+Coverage = partitions tested / partitions identified x 100%
+
+| Test Case | # of Rooms | Expected Results | Coverage |
+| --------- | ---------- | ---------------- | -------- |
+| TC1       | 7          | ACCEPTED         | 33%      |
+| TC2       | 0          | REJECTED         | 33%      |
+| TC3       | 12         | REJECTED         | 33%      |
+We have 3 partitions tested (i.e before 1, within the range, and after 10) and the partitions identified which are the 3 inputs (7, 0, 12)
+
+This is EQUIVALENCE PARTITIONING - a test technique that organized data into distinct groups known as partitions or equivalence partitions. ONE INPUT tests the whole partition, and if one input finds a defect then any other value in that partition should find it too. For example, if 7 works then 8 will too. 
+
+Now, practicing this myself and taking a requirement from the list above for reservations, I will choose 'Every valid reservation includes a one-time $50 cleaning fee.'
+
+The test development process for a cleaning fee requirement is different from testing the numeric range from the earlier example but can be broken down with some basic questions. 
+
+What is required before the $50 fee is applied? 
+Would the test catch it if the fee was applied every night instead as a one-time fee as intended?
+What is the expected result?
+
+### REQUIREMENT: "Every valid reservation includes a one-time $50 cleaning fee"
+
+| Classification | Partition            | Condition                                                            | Expected Results                                         |
+| -------------- | -------------------- | -------------------------------------------------------------------- | -------------------------------------------------------- |
+| TC1            | VALID                | All rules for reservations pass, and every night chosen is available | ACCEPTED, $50 added ONE time to the total                |
+| TC2            | INVALID              | Any of the reservation rules fail (i.e 0 guests, 35 nights, etc)     | REJECTED, error thrown and no reservation or fee charged |
+| TC3            | not valid or invalid | Info is valid, however one of the nights booked is unavailable       | REJECTED, no reservation or fee charged                  |
+
+
+
