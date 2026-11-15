@@ -132,8 +132,8 @@ Rule 6
 - Checkout: October 4
 - Number of guests: 6
 - Availability: Every requested night is available.
-- Expected Actions: A3 `createPendingReservation`, A4 `chargeBaseCost`, A5 `addGuestSurcharge`
-- Expected Result: The reservation is created in `Pending`.
+- Expected Actions: A3 createPendingReservation, A4 chargeBaseCost, A5 addGuestSurcharge
+- Expected Result: The reservation is created in Pending.
 - Expected Price: TOTAL $725 -three (3) nights at $200 is $600 
 	- One extra guest is 25 per night
 	- so 25x3= 75
