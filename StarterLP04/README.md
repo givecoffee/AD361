@@ -5,6 +5,7 @@ Decision Table Testing and State Transition Testing for North Vacation Booking
 Instructions.md will include the reservation requirements list, condition examples, space to elaborate and review on which conditions affect whether the reservations are accepted, and actions that could occur based on those conditions. Conditions are the inputs or variables we put into the "machine" that will determine what decisions are made, and the actions are the result of those combinations of conditions.
 
 Side note: Going into this, I remember a lot of it was in JavaScript/TypeScript so I am sticking with those conventions. I have changed up how I will be drafting decision tables, test cases, and other documentation to be more consistent with that. This will affect how I describe boolean names as well, as they go with "is" or "has" and functions start off a little differently from C or other languages. This change will actually make it read more like plain English and possibly easier to follow for demonstrative purposes as well.
+
 ### Step 1: Identify Conditions and Actions 
  
 When going through the list of requirements on Instructions.md (included in this repo), you have to stop and ask if this is a thing that need be "checked" or something that actually happens. 
@@ -30,6 +31,8 @@ THE ACTIONS (what is happening?)
 | A3  | createPendingReservation | Create Reservation in Pending  state                |
 | A4  | chargeBaseCost           | $200 multiplied by nights + $50 cleaning fee        |
 | A5  | addGuestSurcharge        | $25 multiplied by (guests - 5) multiplied by nights |
+
+
 Remember: addGuestSurcharge (rule applies to more than 5 guests) and by factoring it into the equation you don't need a lot of complex logic. TypeScript does NOT have the ValueError built in so I will have to create error classes myself that extend from Error and include a more descriptive indication of which error was thrown. This can all be added later, but is something to note is important to add on early. (Throwback to one of the first lessons where we tracked errors this way using Jest and to check which ones were thrown) Admittedly, coming from a Java background initally, I found the constructor to be useful in customizing these error classes.
 
 All input is validated before availability is even checked so in the case that C1, C2, or C3 is FALSE -> then only A1 (Action 1) runs and C4 (isAvailable) does not even need to be checked. 
@@ -58,6 +61,7 @@ What remains is a more simplified decision table with six rules:
 | A3 createPendingReservation |     |     |     |     | O   | O   |
 | A4 chargeBaseCost           |     |     |     |     | O   | O   |
 | A5 addGuestSurcharge        |     |     |     |     |     | O   |
+
 RULE SUMMARY:
 R1 - Dates are backwards or on the same exact day, throws ValueError
 R2 - Dates are in correct order but the stay is too long, throws ValueError
@@ -159,6 +163,7 @@ STATES:
 | S3  | Checked In |
 | S4  | Completed  |
 | S5  | Cancelled  |
+
 Note: S4 and S5 cannot be changed as they are final aka "terminal" - nothing can change these two.
 
 EVENTS:
@@ -206,6 +211,7 @@ The expected result of each event from each of the relevant states. Six valid st
 | ST10    | Completed      | Guest attempts to cancel                                      | Completed      | An InvalidStateErro is thrown.                                                | Invalid           |
 | ST11    | Pending        | Payment succeeds, Guest checks in , Guest checks out          | Completed      | The reservation goes through every step and is completed.                     | Complete sequence |
 | ST12    | Pending        | Payment succeeds, Guest cancels, Guest attempts to check in.. | Cancelled      | The reservation is cancelled, and the later check-in throws InvalidStateError |                   |
+
 ### Personal Notes
 
 Making the decision table and then the state transition table seemed excessive at first, but then I realized that given certain inputs we can figure out the actions needed or what happens next, but the ST tables themselves allows us to answer "okay, now that x happened, what possibilities can happen next?" Because there are invalid state transitions and they have the ability to break the booking system, these become increasingly important to expose rather than following the tried and true "happy path" you get sucked into pursuing right out of the gate. No need to test everything, just what will behave differently. TEST OUTCOMES. Once the table is laid out and the logic is tested, they can be translated to real code a lot easier. Up until this point, I have found that testing is not just a step that comes at the end of building something, but it can be planned from the beginning.
