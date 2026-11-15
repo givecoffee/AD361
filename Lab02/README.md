@@ -48,6 +48,8 @@ ACTIONS
 | A2  | display error: "Need 1 letter minimum"       |
 | A3  | display error: "Need 1 number minimum"       |
 | A4  | display error: "Need at least 6 chars total" |
+
+
 Once we know the conditions, the expected actions, we can map out what to expect from the groups of inputs. Below is a table with the corresponding conditions (C1, C2, C3) and actions (A1, A2, A3, A4). Policies/rules are in place to show what the test cases would be, what expected results you get in return, and why it happens. 
 Instead of listing them as Test Case 1, I went with a "PW-01" so that it is easier for me to know that these are for Password Test Cases. 
 
