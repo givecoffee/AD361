@@ -210,7 +210,7 @@ The expected result of each event from each of the relevant states. Six valid st
 | ST09    | Cancelled      | Guest attempts to check in                                    | Cancelled      | An InvalidStateError is thrown.                                               | Invalid           |
 | ST10    | Completed      | Guest attempts to cancel                                      | Completed      | An InvalidStateErro is thrown.                                                | Invalid           |
 | ST11    | Pending        | Payment succeeds, Guest checks in , Guest checks out          | Completed      | The reservation goes through every step and is completed.                     | Complete sequence |
-| ST12    | Pending        | Payment succeeds, Guest cancels, Guest attempts to check in.. | Cancelled      | The reservation is cancelled, and the later check-in throws InvalidStateError |                   |
+| ST12    | Pending        | Payment succeeds, Guest cancels, Guest attempts to check in.. | Cancelled      | The reservation is cancelled, and the later check-in throws InvalidStateError |  CANCELLED                 |
 
 ### Personal Notes
 
