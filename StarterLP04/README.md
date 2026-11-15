@@ -144,12 +144,12 @@ BOUNDARY TESTS:
 
 | ID   | Rule | What it tests                          | Check-in  to Checkout | Guests | Availability    | Expected Result                              |
 | ---- | ---- | -------------------------------------- | --------------------- | ------ | --------------- | -------------------------------------------- |
-| TC07 | R5   | Longest valid stay (31 nights)         | Nov 1 - Dec 1         | 1      | All open        | Created, `$6,250` (31 × $200 + $50)          |
-| TC08 | R5   | Shortest valid stay duration (1 night) | Nov 1 - Nov 2         | 1      | All open        | Created, `$250` ($200 + $50)                 |
-| TC09 | R6   | Most guests allowed (12)               | Nov 1 - Nov4          | 12     | All open        | Created, `$1,175` ($600 + 7 × $25 × 3 + $50) |
+| TC07 | R5   | Longest valid stay (31 nights)         | Nov 1 - Dec 1         | 1      | All open        | Created, $6,250 (31 × $200 + $50)          |
+| TC08 | R5   | Shortest valid stay duration (1 night) | Nov 1 - Nov 2         | 1      | All open        | Created, $250 ($200 + $50)                 |
+| TC09 | R6   | Most guests allowed (12)               | Nov 1 - Nov4          | 12     | All open        | Created, $1,175 ($600 + 7 × $25 × 3 + $50) |
 | TC10 | R3   | guests below the minimum (0)           | Nov 1- Nov 4          | 0      | All open        | ValueErro                                    |
 | TC11 | R1   | Checkout is before check-in            | Nov 4 - Nov 1         | 3      | All open        | ValueError                                   |
-| TC12 | R5   | Checkout night isn’t counted           | Nov 1 - nov 4         | 3      | Nov 4 is booked | Created, `$650`                              |
+| TC12 | R5   | Checkout night isn’t counted           | Nov 1 - nov 4         | 3      | Nov 4 is booked | Created, $650                              |
 ### Step 4: identify reservation states and events
 
 States will be referred to as S1, S2, etc.
