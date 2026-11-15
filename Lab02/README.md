@@ -24,7 +24,7 @@ An example of the password partitions:
 | Long enough but missing the required char type (number) | NO     | redlobster!   |
 | Empty input                                             | NO     |               |
 
-Once you know the rules, in this case what the password should require, then you can write partitions. These groups represent a whole range of inputs that should produce the same results. When signing up for an account, multiple rules are being checked at once such as a valid email address xxx@xxx.com, the password rules to ensure account safety, and a valid date of birth in the right format. 
+Once you know the rules, in this case what the password should require, then you can write partitions. These groups represent a whole range of inputs that should produce the same results. When signing up for an account, multiple rules are being checked at once such as a valid email address name@email.com, the password rules to ensure account safety, and a valid date of birth in the right format. 
 
 ### Step 3: Decision Table Testing
 
@@ -78,6 +78,7 @@ STATES
 | S2  | Profile            | Step 2/3: name, DOB                                                            |
 | S3  | T & C              | Step 3/3: long terms and conditions page, agree option and then SIGN UP        |
 | S4  | Account is created | Signed in, brought to the spotfiy web page or redirected to download page/ app |
+
 EVENTS
 
 | ID  | Event                          |
@@ -86,6 +87,7 @@ EVENTS
 | E2  | Click NEXT after invalid input |
 | E3  | Click BACK arrow               |
 | E4  | Click SIGN UP                  |
+
 STATE TRANSITION TABLE
 
 | Current State/Event    | E1 (valid)  | E2 (invalid) | E3 (back) | E4 (sign up) |
@@ -95,6 +97,7 @@ STATE TRANSITION TABLE
 | S2 profile             | S3          | S2 + ERROR   | S1        | X            |
 | S3 T&C                 | X           | X            | S2        | S4           |
 | S4 Account is created! | X           | X            | X         | X            |
+
 NOTE: If the system is deisgned to keep you on the same step to show you an error and allow you to correct it, it can remain in the same state and that is totally valid. (read: self-transitions) and X is used in the table to show that this would be an invalid transition. If you are using the back button (E3) after an account already exists, this would be an invalid transition because you should NOT go back into the sign up form and make a new account.
 
 X1, X2, X3, X4 are (X) Invalid transitions 1-4. From the table above these would be:
@@ -106,11 +109,13 @@ INVALID TRANSITIONS
 | X2                      | S1/S2 + sign up button   | Cannot create an account without finishing all steps             |
 | X3                      | S4 + browser button back | Must not reopen the form or use info to create duplicate account |
 | X4                      | S4 + refresh in browser  | Must not submit thew signup from again (repetitive)              |
+
 TEST CASES
 
 Earlier, I made test cases on specifically the password rules. The following test cases will tie the email, password, and DOB/profile rules together. I spent some time trying to understand what naming conventions to use for these test cases, as you can get really descriptive, or it can be misleading if you are naming a test case after state transitions with the states themselves. In this case, I decided  to be very descriptive in this table since it is combining a lot of knowledge from earlier in this document and I did not want there to be any confusion (as I found myself getting confused myself). After looking at other repositories and articles, it seems that this helps QA teams track and label tests based on the features a lot easier.
 
 Below is a more comprehensive table with the test cases and their respective names, what states they cover (invalid ones marked as X), the starting screen/phase, the steps taken and inputs entered, and the expected results from those inputs. TEST CASE DESC will describe what that test case is designed to do as well. I put rae@gmail.com as tester email but you can use whatever.
+
 
 | ID        | Test Case Desc                                                                                   | Covers | Start       | Steps                               | Expected Result                                                               |
 | --------- | ------------------------------------------------------------------------------------------------ | ------ | ----------- | ----------------------------------- | ----------------------------------------------------------------------------- |
