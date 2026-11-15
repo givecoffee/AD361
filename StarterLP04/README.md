@@ -63,12 +63,12 @@ What remains is a more simplified decision table with six rules:
 | A5 addGuestSurcharge        |     |     |     |     |     | O   |
 
 RULE SUMMARY:
-R1 - Dates are backwards or on the same exact day, throws ValueError
-R2 - Dates are in correct order but the stay is too long, throws ValueError
-R3 - Dates are correct, but guest count is out of normal range, throws ValueError
-R4 - Everything is valid, but a night is already booked, throws UnavailableError
-R5 - Booking is valid with 1-5 guests, reservation is in Pending phase, and cost is base + cleaning fee
-R6 - Booking is valid with 6-12 guests. Reservation is in Pending phase, and the cost is base + cleaning fee + guest surcharge
+- R1 - Dates are backwards or on the same exact day, throws ValueError
+- R2 - Dates are in correct order but the stay is too long, throws ValueError
+- R3 - Dates are correct, but guest count is out of normal range, throws ValueError
+- R4 - Everything is valid, but a night is already booked, throws UnavailableError
+- R5 - Booking is valid with 1-5 guests, reservation is in Pending phase, and cost is base + cleaning fee
+- R6 - Booking is valid with 6-12 guests. Reservation is in Pending phase, and the cost is base + cleaning fee + guest surcharge
 
 ### Step 3: Decision Table Test Cases
 
