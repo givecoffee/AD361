@@ -174,3 +174,7 @@ Testing does not help much if nobody hears about the results. The audience chang
 Each defect report includes: an ID, which rule it breaks (what rule number), steps to reproduce, expected vs actual result, severity, and a screenshot if it helps.
 
 Personal Note: Putting this together, I realized it is what everything else depends on. The rules from previous assignments and tables, my partitions and boundaries became the test data, and the risk register decides what gets tested first. The entry and exit criteria were the most useful part for me, because they turn "are we ready?" and "are we done?" into something tangible to checkl against. 
+
+## AI Disclosure
+
+I start with writing notes during lectures, swap to make notes on Obsidian when I need to make tables or reference previous assignments, and use AI assistance to format and organize the information so it is easier for others to read and understand. I use prompts such as "format this in markdown and with organized tables so the information is easier to follow" as well as building review quizzes from my own notes to respond to. 
