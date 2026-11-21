@@ -201,6 +201,8 @@ npm test -- --coverage
 |Branches|100%|
 |Functions|100%|
 |Lines|100%|
+
+
 SCREENSHOT OF RESULTS:
 (top) test suites, (bottom) code coverage
 
@@ -210,7 +212,7 @@ SCREENSHOT OF RESULTS:
 
 My tests ran every part of App.tsx: the useState line, the return that draws the page, and all three onClick functions. No statements were left untested. Functions shows 4 instead of 3 because App itself counts as a function along with the three arrow functions in the buttons.
 
-Branches says 100%, but there are actually 0 branches. Jest counts 0 out of 0 as 100%, so the number looks good but it isn't measuring anything here. That matches what I found in Step 2, since there's no if, ternary, or && in the component.
+Branches says 100%, but there are actually 0 branches. Jest counts 0 out of 0 as 100%, so the number looks good but it isn't measuring anything here. That matches what I found in Step 2.
 
 I don't think 100% proves the component works correctly. Coverage only tells me each line ran at least once, not that it did the right thing. If Increment was written as count + 2, it would still be 100% covered and only my expect lines would catch it. Coverage also can't tell me about things that aren't in the code at all, like the count not saving after a refresh.
 
