@@ -1,6 +1,8 @@
 
 ## Step 1: Exploratory Testing
 
+Starting Handwritten Notes for this section: https://github.com/givecoffee/AD361/blob/main/Lab03/HandNotesWhiteBoxTesting.pdf 
+
 Unlike the North Vacation booking app test plan in recent weeks, the tests were practically written before they were even ran. Exploratory testing, however, is the opposite and you learn more about the software and test it at the same time. Every time you experiment with something, you get more ideas on what to try next.
 
 ### Making a test charter
