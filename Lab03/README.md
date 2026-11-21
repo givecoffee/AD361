@@ -26,12 +26,14 @@ Time box: 20 minutes
 The app also lets the count go below 0. Nothing on the page says if negative numbers are allowed, so I couldn't tell if that was on purpose just from using it.
 
 Results of some of the initial tests:
+
 Count Loaded:
-!CountLoaded](screenshots/CountLoaded.png)
 
-![Count Decrement Once:](screenshots/CountDecerementOnce.png)
+![Count Loaded](screenshots/CountLoaded.png)
 
-![Count After Refresh:](screenshots/CountAfterRefresh.png)
+![Count Decrement Once](screenshots/CountDecerementOnce.png)
+
+![Count After Refresh](screenshots/CountAfterRefresh.png)
 
 
 ## Step 2: Reviewing the source code
