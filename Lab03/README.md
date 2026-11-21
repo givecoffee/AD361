@@ -25,6 +25,15 @@ Time box: 20 minutes
 
 The app also lets the count go below 0. Nothing on the page says if negative numbers are allowed, so I couldn't tell if that was on purpose just from using it.
 
+Results of some of the initial tests:
+Count Loaded:
+!CountLoaded](screenshots/CountLoaded.png)
+
+![Count Decrement Once:](screenshots/CountDecerementOnce.png)
+
+![Count After Refresh:](screenshots/CountAfterRefresh.png)
+
+
 ## Step 2: Reviewing the source code
 
 Refreshing resets the count, so the app doesn't save anything in the browser. This failed my expectation, but there's no requirement that says it should save. So it might not be a bug, just something I assumed. Without looking at the code, I could already guess there probably isn't any persistent storage logic.
