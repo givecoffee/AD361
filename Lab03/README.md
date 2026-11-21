@@ -187,7 +187,7 @@ npm test -- --coverage
 SCREENSHOT OF RESULTS:
 (top) test suites, (bottom) code coverage
 
-
+https://github.com/givecoffee/AD361/blob/main/Lab03/screenshots/TestSuiteResults.png 
 
 My tests ran every part of App.tsx: the useState line, the return that draws the page, and all three onClick functions. No statements were left untested. Functions shows 4 instead of 3 because App itself counts as a function along with the three arrow functions in the buttons.
 
