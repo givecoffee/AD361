@@ -31,7 +31,11 @@ Count Loaded:
 
 ![Count Loaded](screenshots/CountLoaded.png)
 
+Count Decrement Once:
+
 ![Count Decrement Once](screenshots/CountDecrementOnce.png)
+
+Count After Refresh:
 
 ![Count After Refresh](screenshots/CountAfterRefresh.png)
 
