@@ -38,7 +38,7 @@ Current time of when the Todo is logged with Date.now(). Unsure about the format
 
 As a reminder to myself: while hovering over the code in the Visual Studio Code IDE, I was able to see the format for the Date.now() function exactly, and it is a long series of numbers because it is a unique date down to the millisecond.
 
-![[Pasted image 20261125194546.png]]
+![[/screenshots/datenowBreakdown.png]]
 
 Test I wrote for createTodo:
 
