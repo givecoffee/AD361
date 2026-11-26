@@ -156,13 +156,13 @@ describe("countDone loop coverage", () => {
 ```
 
 I made these todo objects by hand instead of using createTodo so I could set done to true myself and use simple ids like 1, 2, 3. It also keeps these tests only about countDone, so if createTodo broke these wouldn't fail because of it.
-### Coverage 
-
-There wasn't a coverage script in package.json, so it gave me a missing script error. Added this under scripts:
-
-```
-"coverage": "jest --coverage"
-```
-
 
 All files, statements, branch, functions, and lines were ran at 100% Coverage.
+
+npm test:
+
+![npm test](./screenshots/npmTest.png)
+
+npm run coverage:
+
+![npm coverage](./screenshots/npmRunCoverage.png)
